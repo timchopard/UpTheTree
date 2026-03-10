@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+
+    {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+  </head>
+
+  <body>
+    <div class="bg-decor" aria-hidden="true">
+      <span class="decor d1 acorn"></span>
+      <span class="decor d2 leaf"></span>
+      <span class="decor d3 acorn"></span>
+      <span class="decor d4 leaf"></span>
+      <span class="decor d5 acorn"></span>
+      <span class="decor d6 leaf"></span>
+      <span class="decor d7 acorn"></span>
+      <span class="decor d8 leaf"></span>
+      <span class="decor d9 acorn"></span>
+      <span class="decor d10 leaf"></span>
+    </div>
+    <div class="page">
+      <header class="site-header">
+        {{ partial "header.html" . }}
+      </header>
+
+      <main class="site-main">
+        <div class="container">
+          {{ block "main" . }}{{ end }}
+        </div>
+      </main>
+
+      <footer class="site-footer">
+          {{ partial "footer.html" . }}
+      </footer>
+    </div>
+  </body>
+</html>

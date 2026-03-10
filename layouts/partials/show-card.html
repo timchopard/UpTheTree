@@ -1,0 +1,36 @@
+{{ $p := .page }}
+{{ $isPast := .isPast }}
+
+<div class="show {{ if $isPast }}is-past{{ end }}">
+  <div>
+    <strong><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></strong>
+
+    {{ with $p.Params.showDate }}
+      {{ $d := time . }}
+      <p class="show-meta">
+        {{ $d.Format "Mon, 02 Jan 2006 · 15:04" }} · {{ $p.Params.venue }} · {{ $p.Params.city }}
+      </p>
+    {{ end }}
+
+    {{ if not $isPast }}
+      {{ with $p.Summary }}
+        <div class="show-meta">{{ . }}</div>
+      {{ end }}
+    {{ end }}
+  </div>
+
+  <div>
+    {{ if $p.Params.soldOut }}
+      <span class="badge soldout">Sold out</span>
+    {{ else if and (not $isPast) $p.Params.ticketURL }}
+      <a class="btn"
+         href="{{ $p.Params.ticketURL | safeURL }}"
+         target="_blank"
+         rel="noopener noreferrer">
+        Get tickets
+      </a>
+    {{ else if not $isPast }}
+      <span class="badge">Tickets</span>
+    {{ end }}
+  </div>
+</div>

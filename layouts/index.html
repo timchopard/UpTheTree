@@ -1,0 +1,58 @@
+{{ define "main" }}
+
+<section class="home-hero">
+  <div class="hero-blob">
+  <div class="hero-stack" aria-label="Animated hero images">
+    <img class="layer layer2" src="/images/squirrel.png" alt="UTT Logo Squirel" />
+    <div class="layer layer1wrap" aria-hidden="true">
+      <img class="layer-img" src="/images/bern.png" alt="City of Bern" />
+    </div>
+    <img class="layer layer3" src="/images/text.png" alt="UTT Logo Text" />
+    <img class="layer layer4" src="/images/acorn.png" alt="UTT Logo Acorn" />
+    <div class="layer layer5">
+    <svg viewBox="0 0 1000 200" class="layer5-svg">
+      <text x="50%" y="60%" text-anchor="middle">
+        ENGLISH IMPROV BERN
+      </text>
+    </svg>
+  </div>
+  </div>
+  </div>
+</section>
+
+<section class="grid">
+  <div class="card glass">
+    <div class="card__content">
+    <h2>Upcoming shows</h2>
+
+    {{ $now := now }}
+    {{ $upcoming := where .Site.RegularPages "Section" "shows" }}
+    {{ $upcoming = where $upcoming "Params.showDate" "ne" nil }}
+    {{ $upcoming = sort (where $upcoming "Params.showDate" ">=" $now) "Params.showDate" "asc" }}
+
+    {{ if gt (len $upcoming) 0 }}
+      {{ range first 2 $upcoming }}
+        {{ partial "show-card.html" . }}
+      {{ end }}
+      <p style="margin-top:12px;">
+        <a href="{{ "/shows" | relURL }}">See all shows →</a>
+      </p>
+    {{ else }}
+      <p>No upcoming shows are listed yet. Check back soon.</p>
+    {{ end }}
+    </div>
+  </div>
+
+  <aside class="card glass">
+    <h2>About</h2>
+    <p>
+      Up the Tree is an English improv comedy group based in Bern.
+      (Replace this with your final blurb.)
+    </p>
+    <p style="margin-top:12px;">
+      <a href="{{ "/info" | relURL }}">Info / Contact →</a>
+    </p>
+  </aside>
+</section>
+
+{{ end }}

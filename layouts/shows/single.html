@@ -1,0 +1,28 @@
+{{ define "main" }}
+<article class="card">
+  <h1>{{ .Title }}</h1>
+
+  {{ with .Params.showDate }}
+    {{ $d := time . }}
+    <p class="show-meta">
+      {{ $d.Format "Mon, 02 Jan 2006 · 15:04" }} · {{ $.Params.venue }} · {{ $.Params.city }}
+    </p>
+  {{ end }}
+
+  {{ if .Params.soldOut }}
+    <p><span class="badge soldout">Sold out</span></p>
+  {{ else if .Params.ticketURL }}
+    <p>
+      <a class="btn"
+         href="{{ .Params.ticketURL | safeURL }}"
+         target="_blank"
+         rel="noopener noreferrer">
+        Get tickets
+      </a>
+    </p>
+  {{ end }}
+
+  <div style="height:10px"></div>
+  {{ .Content }}
+</article>
+{{ end }}

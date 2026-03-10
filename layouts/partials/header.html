@@ -1,0 +1,51 @@
+<header class="site-header">
+  <div class="container nav">
+    <div class="brand">
+      <a class="brand-link" href="{{ "/" | relURL }}">
+        {{ .Site.Params.logoText | default .Site.Title }}
+      </a>
+    </div>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="sr-only">Open menu</span>
+      <span class="burger" aria-hidden="true"></span>
+    </button>
+
+    <nav id="site-nav" class="menu" aria-label="Primary">
+      {{ range .Site.Menus.main }}
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+      {{ end }}
+    </nav>
+  </div>
+
+  <script>
+    (function () {
+      const header = document.querySelector('.site-header');
+      const btn = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('site-nav');
+      if (!header || !btn || !nav) return;
+
+      function setOpen(open) {
+        header.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      }
+
+      btn.addEventListener('click', () => {
+        const open = !header.classList.contains('is-open');
+        setOpen(open);
+      });
+
+      // Close when a menu item is clicked (nice on mobile)
+      nav.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (!a) return;
+        setOpen(false);
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
+  </script>
+</header>

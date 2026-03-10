@@ -1,0 +1,56 @@
+{{ define "main" }}
+
+<article class="card">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}
+    <div class="tagline">{{ . }}</div>
+  {{ end }}
+</article>
+
+{{ $now := now }}
+
+{{/* Only real show pages (must have showDate) */}}
+{{ $pages := where .RegularPages "Params.showDate" "!=" nil }}
+
+{{ $future := slice }}
+{{ $past := slice }}
+
+{{ range $pages }}
+  {{ $d := time .Params.showDate }}
+  {{ if ge $d $now }}
+    {{ $future = $future | append (dict "page" . "date" $d) }}
+  {{ else }}
+    {{ $past = $past | append (dict "page" . "date" $d) }}
+  {{ end }}
+{{ end }}
+
+{{ $future = sort $future "date" "asc" }}
+{{ $past = sort $past "date" "desc" }}
+
+<div style="height:16px"></div>
+
+<section class="card">
+  <h2>Upcoming</h2>
+  {{ if gt (len $future) 0 }}
+    {{ range $future }}
+      {{ partial "show-card.html" (dict "page" .page "isPast" false) }}
+    {{ end }}
+  {{ else }}
+    <p>No upcoming shows listed yet.</p>
+  {{ end }}
+</section>
+
+<div style="height:16px"></div>
+
+<section class="card">
+  <h2>Past</h2>
+  {{ if gt (len $past) 0 }}
+    {{ range $past }}
+      {{ partial "show-card.html" (dict "page" .page "isPast" true) }}
+    {{ end }}
+  {{ else }}
+    <p>No past shows listed yet.</p>
+  {{ end }}
+</section>
+
+{{ end }}

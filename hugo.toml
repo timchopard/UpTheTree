@@ -1,0 +1,22 @@
+baseURL = 'https://upthetree.ch'
+languageCode = 'en'
+title = 'Up the Tree'
+enableRobotsTXT = true
+
+[params]
+    tagline = "English Improv Comedy in Bern"
+    logoText = "Up the Tree"
+
+[menu]
+    [[menu.main]]
+        name = "Home"
+        pageRef = "/"
+        weight = 10
+    [[menu.main]]
+        name = "Shows"
+        pageRef = "/shows"
+        weight = 20
+    [[menu.main]]
+        name = "Contact"
+        pageRef = "/contact"
+        weight = 30
