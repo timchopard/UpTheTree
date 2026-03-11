@@ -418,7 +418,7 @@ footer{
 .layer1wrap .img{
   width:100%;
   height:100%;
-  object-fit: cover;
+  object-fit: fit;
   object-position: top center;
   display:block;
   opacity:1 !important;
@@ -439,6 +439,9 @@ footer{
     var(--cream) 100%
   );
 }
+
+
+
 
 /* Z order */
 .layer2{ z-index:1; }
