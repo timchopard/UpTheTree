@@ -417,7 +417,8 @@ footer{
 }
 
 .layer1wrap img{
-  max-width:145%!important;
+/*  max-width:145%!important;*/ 
+    max-width:100%;
 }
 
 /* Fade bottom of image1 (you currently fade to cream) */
