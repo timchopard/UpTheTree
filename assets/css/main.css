@@ -573,3 +573,18 @@ footer{
 }
 
 .contact-form textarea{ resize: vertical; }
+
+.center-form {
+    padding: 1rem;
+    border-radius: 0.7rem;
+    margin: auto;
+    margin-top: 2rem;
+    width: 85%;
+    align-content: center;
+}
+
+.contact-form {
+    margin:auto;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}

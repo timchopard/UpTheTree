@@ -2,7 +2,7 @@
 <article class="card">
   <h1>{{ .Title }}</h1>
   {{ .Content }}
-
+    <div class="center-form glass">
   <form
     action="https://formspree.io/f/mnjblkla"
     method="POST"
@@ -27,5 +27,6 @@
 
     <button class="btn" type="submit">Send</button>
   </form>
+    </div>
 </article>
 {{ end }}
