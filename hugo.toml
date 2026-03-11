@@ -20,3 +20,4 @@ enableRobotsTXT = true
         name = "Contact"
         pageRef = "/contact"
         weight = 30
+
