@@ -24,15 +24,19 @@
   <div class="card glass">
     <div class="card__content">
     <h2>Upcoming shows</h2>
-
-    {{ $now := now }}
-    {{ $upcoming := where .Site.RegularPages "Section" "shows" }}
-    {{ $upcoming = where $upcoming "Params.showDate" "ne" nil }}
-    {{ $upcoming = sort (where $upcoming "Params.showDate" ">=" $now) "Params.showDate" "asc" }}
+    {{ $upcoming := slice }}
+    {{ range where .Site.RegularPages ".Section" "shows" }}
+        {{ if .Params.showdate }}
+            {{ $pagetime := time .Params.showdate }}
+            {{ if gt $pagetime now }}
+                {{ $upcoming = $upcoming | append . }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
 
     {{ if gt (len $upcoming) 0 }}
       {{ range first 2 $upcoming }}
-        {{ partial "show-card.html" . }}
+        {{ partial "show-card-home.html" . }}
       {{ end }}
       <p style="margin-top:12px;">
         <a href="{{ "/shows" | relURL }}">See all shows →</a>
@@ -46,8 +50,7 @@
   <aside class="card glass">
     <h2>About</h2>
     <p>
-      Up the Tree is an English improv comedy group based in Bern.
-      (Needs updating with bettern info).
+      Up the Tree is an English improv comedy group based in Bern. 
     </p>
     <p style="margin-top:12px;">
       <a href="{{ "/info" | relURL }}">Info / Contact →</a>

@@ -1,0 +1,22 @@
+{{ $p := . }}
+
+<div class="show">
+  <div>
+    <strong><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></strong>
+
+    {{ with $p.Params.showDate }}
+      {{ $d := time . }}
+      <h5>
+        {{ $d.Format "Mon, 02 Jan 2006 · 15:04" }}
+      </h5>
+      <p class="show-meta">
+        {{ $p.Params.venue }} · {{ $p.Params.city }}
+      </p>
+    {{ end }}
+
+    {{ with $p.Summary }}
+    <div class="show-meta">{{ . }}</div>
+    {{ end }}
+  </div>
+</div>
+
