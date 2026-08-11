@@ -270,7 +270,7 @@ h2 {
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
   width: 85%; /* TODO ADD MOBILE MINIMUM */
-  margin: auto;
+  margin: 1rem auto;
 }
 .show-meta{ color:var(--muted); font-size:14px; }
 
