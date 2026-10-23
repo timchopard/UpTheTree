@@ -1,32 +1,8 @@
 {{ define "main" }}
 <article class="card">
   <h1>{{ .Title }}</h1>
-  {{ .Content }}
     <div class="center-form glass">
-  <form
-    action="https://formspree.io/f/mnjblkla"
-    method="POST"
-    class="contact-form"
-  >
-    <label>
-      Name
-      <input type="text" name="name" autocomplete="name" required>
-    </label>
-
-    <label>
-      Email
-      <input type="email" name="email" autocomplete="email" required>
-    </label>
-
-    <label>
-      Message
-      <textarea name="message" rows="6" required></textarea>
-    </label>
-
-    <input type="hidden" name="_subject" value="New contact submission">
-
-    <button class="btn" type="submit">Send</button>
-  </form>
+  {{ .Content }}
     </div>
 </article>
 {{ end }}
