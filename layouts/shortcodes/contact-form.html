@@ -1,0 +1,36 @@
+{{/*
+  Contact form posting to the self-hosted endpoint.
+
+  Usage in any content file:
+    {{< contact-form >}}
+    {{< contact-form site="othersite" >}}
+
+  "site" must match a [sites.<key>] block in sites.toml on the server.
+  The endpoint URL can be set once in hugo.toml:
+    [params]
+      contactFormEndpoint = "https://forms.cloudberries.io/submit"
+      contactFormSite = "cloudberries"
+*/}}
+{{- $endpoint := site.Params.contactFormEndpoint | default "https://forms.cloudberries.io/submit" -}}
+{{- $site := .Get "site" | default site.Params.contactFormSite | default "cloudberries" -}}
+
+<form class="contact-form" action="{{ $endpoint }}" method="POST">
+  <input type="hidden" name="site" value="{{ $site }}">
+
+  <label for="cf-name">Name</label>
+  <input id="cf-name" type="text" name="name" required maxlength="200" autocomplete="name">
+
+  <label for="cf-email">Email</label>
+  <input id="cf-email" type="email" name="email" required maxlength="254" autocomplete="email">
+
+  <label for="cf-message">Message</label>
+  <textarea id="cf-message" name="message" required maxlength="5000" rows="6"></textarea>
+
+  {{/* Honeypot: hidden from people, but bots fill it in. Leave it empty. */}}
+  <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
+    <label for="cf-gotcha">Leave this field empty</label>
+    <input id="cf-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+  </div>
+
+  <button type="submit">Send</button>
+</form>

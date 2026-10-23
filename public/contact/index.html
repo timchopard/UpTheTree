@@ -6,7 +6,7 @@
     <title>Contact · Up the Tree</title>
 
     
-    <link rel="stylesheet" href="/css/main.min.9d1c10cecc300603a97b0fb138af9915fc74354a964a428b09fd7d8215c7ec19.css" integrity="sha256-nRwQzswwBgOpew&#43;xOK&#43;ZFfx0NUqWSkKLCf19ghXH7Bk=" />
+    <link rel="stylesheet" href="/css/main.min.4cb81babbb005aac548989e8ec1fecb90aad955b36fb3cca0a78655197a1fda6.css" integrity="sha256-TLgbq7sAWqxUiYno7B/suQqtlVs2&#43;zzKCnhlUZeh/aY=" />
   </head>
 
   <body>
@@ -88,33 +88,28 @@
 <article class="card">
   <h1>Contact</h1>
   <p>Get in touch with us using the form below.</p>
+<form class="contact-form" action="https://forms.cloudberries.io/submit" method="POST">
+  <input type="hidden" name="site" value="upthetree">
 
-    <div class="center-form glass">
-  <form
-    action="https://formspree.io/f/mnjblkla"
-    method="POST"
-    class="contact-form"
-  >
-    <label>
-      Name
-      <input type="text" name="name" autocomplete="name" required>
-    </label>
+  <label for="cf-name">Name</label>
+  <input id="cf-name" type="text" name="name" required maxlength="200" autocomplete="name">
 
-    <label>
-      Email
-      <input type="email" name="email" autocomplete="email" required>
-    </label>
+  <label for="cf-email">Email</label>
+  <input id="cf-email" type="email" name="email" required maxlength="254" autocomplete="email">
 
-    <label>
-      Message
-      <textarea name="message" rows="6" required></textarea>
-    </label>
+  <label for="cf-message">Message</label>
+  <textarea id="cf-message" name="message" required maxlength="5000" rows="6"></textarea>
 
-    <input type="hidden" name="_subject" value="New contact submission">
+  
+  <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
+    <label for="cf-gotcha">Leave this field empty</label>
+    <input id="cf-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+  </div>
 
-    <button class="btn" type="submit">Send</button>
-  </form>
-    </div>
+  <button type="submit">Send</button>
+</form>
+
+
 </article>
 
         </div>
